@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$stmt) {
                 $errors[] = "Database error.";
             } else {
-                $stmt->bind_param('ss', $identifier, $identifier);
+                $stmt->bind_param('ss', $identifier, $identifier);//used with mysqli prepared statements
                 $stmt->execute();
                 $res = $stmt->get_result();
                 if ($row = $res->fetch_assoc()) {

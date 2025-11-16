@@ -30,6 +30,8 @@ $result = $stmt->get_result();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Match Results - <?= htmlspecialchars($skill) ?></title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<?php include "theme.php"; ?>
+
 </head>
 <body class="bg-light">
 <div class="container py-5">

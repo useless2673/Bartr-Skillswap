@@ -16,7 +16,10 @@ $receiver_id = isset($_GET['receiver_id']) ? intval($_GET['receiver_id']) : 0;
 <html>
 <head>
     <title>Chatbox</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <?php include "theme.php"; ?>
+
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
         .container { display: flex; height: 90vh; }
@@ -34,17 +37,20 @@ $receiver_id = isset($_GET['receiver_id']) ? intval($_GET['receiver_id']) : 0;
 <body>
 <div class="container">
     <div class="chat-column">
-        <h3>
-            <?php 
-            if($receiver_id > 0){
-                $res = mysqli_query($mysqli, "SELECT name FROM users WHERE id='$receiver_id'");
-                $row = mysqli_fetch_assoc($res);
-                echo "Chat with: " . htmlspecialchars($row['name']);
-            } else {
-                echo "Select a user to chat";
-            }
-            ?>
-        </h3>
+        <div class="d-flex align-items-center mb-2">
+            <a href="dashboard.php" class="btn btn-secondary btn-sm me-3">Back to Dashboard</a>
+            <h3 class="m-0">
+                <?php 
+                if($receiver_id > 0){
+                    $res = mysqli_query($mysqli, "SELECT name FROM users WHERE id='$receiver_id'");
+                    $row = mysqli_fetch_assoc($res);
+                    echo "Chat with: " . htmlspecialchars($row['name']);
+                } else {
+                    echo "Select a user to chat";
+                }
+                ?>
+            </h3>
+        </div>
         <div id="chat"></div>
 
         <?php if($receiver_id > 0): ?>
