@@ -130,6 +130,14 @@ if(isset($_GET['delete_want'])){
 // Fetch skills
 $have_skills = $mysqli->query("SELECT * FROM skills_have WHERE user_id = $user_id")->fetch_all(MYSQLI_ASSOC);
 $want_skills = $mysqli->query("SELECT * FROM skills_want WHERE user_id = $user_id")->fetch_all(MYSQLI_ASSOC);
+$notes = $mysqli->query("
+    SELECT n.id AS note_id, n.title, n.content, nf.file_path 
+    FROM notes n 
+    LEFT JOIN note_files nf ON n.id = nf.note_id
+    WHERE n.user_id = $user_id
+    ORDER BY n.created_at DESC
+")->fetch_all(MYSQLI_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -142,7 +150,7 @@ $want_skills = $mysqli->query("SELECT * FROM skills_want WHERE user_id = $user_i
 
 </head>
 <body class="bg-light">
-<div class="container py-5">
+   <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Welcome, <?= htmlspecialchars($username) ?></h1>
         
@@ -193,6 +201,35 @@ $want_skills = $mysqli->query("SELECT * FROM skills_want WHERE user_id = $user_i
             </form>
         </div>
     </div>
+   <h3>My Notes</h3>
+
+<?php
+$notes = $mysqli->query("
+    SELECT n.id, n.title, nf.file_path 
+    FROM notes n 
+    LEFT JOIN note_files nf ON n.id = nf.note_id
+    WHERE n.user_id = $user_id
+")->fetch_all(MYSQLI_ASSOC);
+?>
+
+<?php foreach($notes as $note): ?>
+<div class="d-flex justify-content-between align-items-center p-3 border rounded mb-2">
+    
+    <strong><?= htmlspecialchars($note['title']) ?></strong>
+
+    <div class="d-flex gap-2">
+        <a href="view_note.php?id=<?= $note['id'] ?>" class="btn btn-info btn-sm">View</a>
+
+        <?php if(!empty($note['file_path'])): ?>
+        <a href="<?= $note['file_path'] ?>" download class="btn btn-success btn-sm">Download</a>
+        <?php endif; ?>
+    </div>
+
+</div>
+<?php endforeach; ?>
+
+<br>
+
     <div>
     <h3>Upload Notes</h3>
 
@@ -214,6 +251,8 @@ $want_skills = $mysqli->query("SELECT * FROM skills_want WHERE user_id = $user_i
 </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
 
