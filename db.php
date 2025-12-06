@@ -1,5 +1,5 @@
 <?php
-$DB_HOST = 'sql211.infinityfree.com';
+$DB_HOST = 'localhost';
 $DB_USER = 'if0_40608293';
 $DB_PASS = 'gy9xGupHKhWxF';
 $DB_NAME = 'if0_40608293_epiz_xxxxxx_projectdb';
