@@ -1,8 +1,8 @@
 <?php
 $DB_HOST = 'localhost';
-$DB_USER = 'if0_40608293';
-$DB_PASS = 'gy9xGupHKhWxF';
-$DB_NAME = 'if0_40608293_epiz_xxxxxx_projectdb';
+$DB_USER = 'root';
+$DB_PASS = '';
+$DB_NAME = 'skill_swap_db';
 
 $mysqli = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
 if ($mysqli->connect_errno) {
