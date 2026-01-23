@@ -1,5 +1,9 @@
 {
-    "name": "useless2673/Bartr-Skillswap",
-    "description": "Dummy composer.json to deploy PHP on Render",
-    "require": {}
+  "name": "khushi/bartr-skillswap",
+  "description": "Skill swap platform built with PHP",
+  "type": "project",
+  "require": {
+    "php": "^8.1"
+  }
 }
+
